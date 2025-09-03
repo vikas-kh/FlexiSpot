@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useMemo } from 'react'
+import { validateBooking } from '../logic/rules'
 import { desks as mockDesks, rooms as mockRooms, bookings as mockBookings } from '../data/mock'
 
 /**
@@ -80,37 +81,19 @@ export function BookingProvider({ children, initialData } = {}) {
    * Returns { success: boolean, booking?, error? }
    */
   function bookResource({ user, resourceType, resourceId, dateISO, startTime, endTime }) {
-    // validate resource exists
+    // validate resource exists first
     if (resourceType === 'desk') {
       if (!desksById.has(Number(resourceId))) return { success: false, error: 'Desk not found' }
-      const desk = desksById.get(Number(resourceId))
-      // restricted zone check
-      const zoneRestricted = rules.restrictedZones.includes(desk.zone)
-      const exception = findExceptionFor(user, 'restrictedZones')
-      if (zoneRestricted && !exception) return { success: false, error: `Zone ${desk.zone} is restricted` }
     } else if (resourceType === 'room') {
       if (!roomsById.has(Number(resourceId))) return { success: false, error: 'Room not found' }
     } else {
       return { success: false, error: 'Invalid resourceType' }
     }
 
-    // time block check
-    const s = timeToMinutes(startTime)
-    const e = timeToMinutes(endTime)
-    const allowed = rules.allowedTimeBlocks.some(block => {
-      const bs = timeToMinutes(block.start)
-      const be = timeToMinutes(block.end)
-      return s >= bs && e <= be
-    })
-    const timeException = findExceptionFor(user, 'allowedTimeBlocks')
-    if (!allowed && !timeException) return { success: false, error: 'Requested time outside allowed blocks' }
-
-    // per-user per-day limit
-    const userBookingsToday = bookings.filter(b => b.user === user && b.dateISO === dateISO)
-    const limit = rules.maxBookingsPerUserPerDay
-    const limitException = findExceptionFor(user, 'maxBookingsPerUserPerDay')
-    const effectiveLimit = limitException ? limitException.value : limit
-    if (userBookingsToday.length >= effectiveLimit) return { success: false, error: 'User booking limit reached for this day' }
+    // Use centralized validator to ensure consistent rule enforcement/messages
+    const booking = { user, resourceType, resourceId: Number(resourceId), dateISO, startTime, endTime }
+    const validation = validateBooking(booking, { bookings, rules, exceptions, desks })
+    if (!validation.ok) return { success: false, error: validation.reason }
 
     // availability check (overlapping bookings)
     if (!isResourceAvailableAt(resourceType, resourceId, dateISO, startTime, endTime)) {

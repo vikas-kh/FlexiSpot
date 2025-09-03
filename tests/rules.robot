@@ -19,10 +19,8 @@ Booking Rules Test
         # pick first available desk each iteration
         Wait Until Element Is Visible    xpath=(//button[contains(@aria-label,'available')])[1]    5s
         Click Element    xpath=(//button[contains(@aria-label,'available')])[1]
-        # set date/time via JS
-        Execute JavaScript    const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));
-        Execute JavaScript    document.querySelectorAll("input[type='time']")[0].value='09:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));
-        Execute JavaScript    document.querySelectorAll("input[type='time']")[1].value='10:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));
+    # set date and both times in one script so native setters exist in the same scope (React-friendly)
+    Execute JavaScript    (function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc && desc.set; const nativeTimeSetter = desc && desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'09:00'); nativeTimeSetter.call(t1,'10:00'); } else { t0.value='09:00'; t1.value='10:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();
         Click Button    xpath=//button[@type='submit' and normalize-space(.)='Book']
         # check expected outcome: first two succeed, third should show limit error
         IF    ${i} < 3
@@ -42,10 +40,8 @@ Booking Rules Test
     Click Element    xpath=//input[@name='resourceType' and @value='desk']
     Wait Until Element Is Visible    xpath=(//button[contains(@aria-label,'available')])[1]    5s
     Click Element    xpath=(//button[contains(@aria-label,'available')])[1]
-    # set an outside time (before 09:00)
-    Execute JavaScript    const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));
-    Execute JavaScript    document.querySelectorAll("input[type='time']")[0].value='07:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));
-    Execute JavaScript    document.querySelectorAll("input[type='time']")[1].value='08:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));
+    # set date and outside times together so React sees updates
+    Execute JavaScript    (function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc && desc.set; const nativeTimeSetter = desc && desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'07:00'); nativeTimeSetter.call(t1,'08:00'); } else { t0.value='07:00'; t1.value='08:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();
     Click Button    xpath=//button[@type='submit' and normalize-space(.)='Book']
     # read alert and assert it mentions 'outside allowed' or similar
     Wait Until Element Is Visible    xpath=//div[@role='alert']    7s
@@ -58,20 +54,21 @@ Booking Rules Test
     # set restricted zone to 'A'
     Input Text    xpath=//label[.//span[contains(text(),'Restricted zones')]]//input    A
     Click Button    xpath=//button[normalize-space(.)='Save rules']
-    Sleep    0.5s
+    # verify the restricted zones input now contains 'A' (confirm rules saved)
+    Wait Until Element Is Visible    xpath=//label[.//span[contains(text(),'Restricted zones')]]//input    5s
+    ${rz}=    Get Value    xpath=//label[.//span[contains(text(),'Restricted zones')]]//input
+    Should Contain    ${rz}    A
 
     # Go back to booking and select a specific desk id that belongs to zone A (desk id 1)
     Go To    ${BASE_URL}/booking
     Wait Until Element Is Visible    xpath=//label[.//span[contains(text(),'User')]]//input    5s
     Input Text    xpath=//label[.//span[contains(text(),'User')]]//input    RuleZoneUser
     Click Element    xpath=//input[@name='resourceType' and @value='desk']
-    # select desk id 1 via the select dropdown
-    Wait Until Element Is Visible    xpath=//select    5s
-    Select From List By Value    xpath=//select    1
-    # set date/time
-    Execute JavaScript    const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));
-    Execute JavaScript    document.querySelectorAll("input[type='time']")[0].value='10:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));
-    Execute JavaScript    document.querySelectorAll("input[type='time']")[1].value='11:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));
+    # select desk id 1 via the seat map button (label D-1) to ensure we pick zone A desk
+    Wait Until Element Is Visible    xpath=//button[contains(@aria-label,'D-1') and contains(@aria-label,'available')]    5s
+    Click Element    xpath=//button[contains(@aria-label,'D-1') and contains(@aria-label,'available')]
+    # set date and times together for restricted zone booking
+    Execute JavaScript    (function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc && desc.set; const nativeTimeSetter = desc && desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'10:00'); nativeTimeSetter.call(t1,'11:00'); } else { t0.value='10:00'; t1.value='11:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();
     Click Button    xpath=//button[@type='submit' and normalize-space(.)='Book']
     # read alert and assert it mentions restricted zone
     Wait Until Element Is Visible    xpath=//div[@role='alert']    5s

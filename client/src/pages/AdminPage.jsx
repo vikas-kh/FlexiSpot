@@ -59,6 +59,12 @@ export default function AdminPage() {
         </div>
       </section>
 
+      {/* Current effective rules (helpful for testing/diagnostics) */}
+      <section className="p-4 border rounded">
+        <h2 className="font-medium">Effective rules (debug)</h2>
+        <pre data-testid="effective-rules" className="mt-2 text-sm bg-gray-50 p-2 rounded text-xs overflow-auto">{JSON.stringify(rules)}</pre>
+      </section>
+
       {/* 2) Booking Rules */}
       <section className="p-4 border rounded">
         <h2 className="font-medium">Booking Rules</h2>
