@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.3 on win32)" generated="2025-09-03T06:16:29.126829" rpa="false" schemaversion="5">
+<suite id="s1" name="Rules" source="C:\Users\vikky\OneDrive\Documents\Projects\FlexiSpot\tests\rules.robot">
+<test id="s1-t1" name="Booking Rules Test" line="9">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:29.513698" level="INFO">Opening browser 'chrome' to base url 'http://localhost:5173/booking'.</msg>
+<arg>${BASE_URL}/booking</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-09-03T06:16:29.513430" elapsed="1.324586"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-09-03T06:16:30.838834" elapsed="0.029876"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-03T06:16:30.870128" elapsed="0.025008"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:30.895561" level="INFO">Typing text 'RuleUser' into text field 'xpath=//label[.//span[contains(text(),'User')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:30.895320" elapsed="0.127475"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.023555" level="INFO">Clicking element 'xpath=//input[@name='resourceType' and @value='desk']'.</msg>
+<arg>xpath=//input[@name='resourceType' and @value='desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.023192" elapsed="0.060247"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.083630" elapsed="0.014953"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.098894" level="INFO">Clicking element 'xpath=(//button[contains(@aria-label,'available')])[1]'.</msg>
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.098727" elapsed="0.049211"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.148396" level="INFO">Executing JavaScript:
+const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.148091" elapsed="0.008784"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.157478" level="INFO">Executing JavaScript:
+document.querySelectorAll("input[type='time']")[0].value='09:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>document.querySelectorAll("input[type='time']")[0].value='09:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.157071" elapsed="0.004608"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.162136" level="INFO">Executing JavaScript:
+document.querySelectorAll("input[type='time']")[1].value='10:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>document.querySelectorAll("input[type='time']")[1].value='10:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.161826" elapsed="0.003306"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.165413" level="INFO">Clicking button 'xpath=//button[@type='submit' and normalize-space(.)='Book']'.</msg>
+<arg>xpath=//button[@type='submit' and normalize-space(.)='Book']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.165260" elapsed="0.066931"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} &lt; 3">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Booked</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.232528" elapsed="0.009244"/>
+</kw>
+<status status="PASS" start="2025-09-03T06:16:31.232327" elapsed="0.009517"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>maxBookingsPerUserPerDay exceeded</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:31.242006" elapsed="0.000021"/>
+</kw>
+<status status="NOT RUN" start="2025-09-03T06:16:31.241891" elapsed="0.000165"/>
+</branch>
+<status status="PASS" start="2025-09-03T06:16:31.232298" elapsed="0.009781"/>
+</if>
+<var name="${i}">1</var>
+<status status="PASS" start="2025-09-03T06:16:30.869931" elapsed="0.372168"/>
+</iter>
+<iter>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.242359" elapsed="0.009733"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.252562" level="INFO">Typing text 'RuleUser' into text field 'xpath=//label[.//span[contains(text(),'User')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.252297" elapsed="0.082011"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.334621" level="INFO">Clicking element 'xpath=//input[@name='resourceType' and @value='desk']'.</msg>
+<arg>xpath=//input[@name='resourceType' and @value='desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.334456" elapsed="0.043632"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.378234" elapsed="0.011292"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.390043" level="INFO">Clicking element 'xpath=(//button[contains(@aria-label,'available')])[1]'.</msg>
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.389864" elapsed="0.042245"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.432544" level="INFO">Executing JavaScript:
+const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.432266" elapsed="0.002822"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.435443" level="INFO">Executing JavaScript:
+document.querySelectorAll("input[type='time']")[0].value='09:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>document.querySelectorAll("input[type='time']")[0].value='09:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.435200" elapsed="0.005405"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.441036" level="INFO">Executing JavaScript:
+document.querySelectorAll("input[type='time']")[1].value='10:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>document.querySelectorAll("input[type='time']")[1].value='10:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.440748" elapsed="0.003420"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.444449" level="INFO">Clicking button 'xpath=//button[@type='submit' and normalize-space(.)='Book']'.</msg>
+<arg>xpath=//button[@type='submit' and normalize-space(.)='Book']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.444299" elapsed="0.051709"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} &lt; 3">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Booked</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.496317" elapsed="0.004452"/>
+</kw>
+<status status="PASS" start="2025-09-03T06:16:31.496128" elapsed="0.004699"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>maxBookingsPerUserPerDay exceeded</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:31.500950" elapsed="0.000022"/>
+</kw>
+<status status="NOT RUN" start="2025-09-03T06:16:31.500861" elapsed="0.000140"/>
+</branch>
+<status status="PASS" start="2025-09-03T06:16:31.496105" elapsed="0.004917"/>
+</if>
+<var name="${i}">2</var>
+<status status="PASS" start="2025-09-03T06:16:31.242281" elapsed="0.258761"/>
+</iter>
+<iter>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.501233" elapsed="0.012078"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.513621" level="INFO">Typing text 'RuleUser' into text field 'xpath=//label[.//span[contains(text(),'User')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.513456" elapsed="0.079367"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.593180" level="INFO">Clicking element 'xpath=//input[@name='resourceType' and @value='desk']'.</msg>
+<arg>xpath=//input[@name='resourceType' and @value='desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.592989" elapsed="0.046142"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.639386" elapsed="0.009679"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.649365" level="INFO">Clicking element 'xpath=(//button[contains(@aria-label,'available')])[1]'.</msg>
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.649206" elapsed="0.043726"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.693431" level="INFO">Executing JavaScript:
+const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.693121" elapsed="0.004365"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.697919" level="INFO">Executing JavaScript:
+document.querySelectorAll("input[type='time']")[0].value='09:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>document.querySelectorAll("input[type='time']")[0].value='09:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.697631" elapsed="0.003659"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.701829" level="INFO">Executing JavaScript:
+document.querySelectorAll("input[type='time']")[1].value='10:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>document.querySelectorAll("input[type='time']")[1].value='10:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.701546" elapsed="0.004708"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.706557" level="INFO">Clicking button 'xpath=//button[@type='submit' and normalize-space(.)='Book']'.</msg>
+<arg>xpath=//button[@type='submit' and normalize-space(.)='Book']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.706392" elapsed="0.050211"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} &lt; 3">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Booked</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:31.756907" elapsed="0.000022"/>
+</kw>
+<status status="NOT RUN" start="2025-09-03T06:16:31.756720" elapsed="0.000242"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>maxBookingsPerUserPerDay exceeded</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.757046" elapsed="0.009623"/>
+</kw>
+<status status="PASS" start="2025-09-03T06:16:31.756990" elapsed="0.009752"/>
+</branch>
+<status status="PASS" start="2025-09-03T06:16:31.756698" elapsed="0.010076"/>
+</if>
+<var name="${i}">3</var>
+<status status="PASS" start="2025-09-03T06:16:31.501174" elapsed="0.265621"/>
+</iter>
+<var>${i}</var>
+<value>1</value>
+<value>4</value>
+<status status="PASS" start="2025-09-03T06:16:30.869121" elapsed="0.897710"/>
+</for>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.767254" level="INFO">Opening url 'http://localhost:5173/booking'</msg>
+<arg>${BASE_URL}/booking</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.767104" elapsed="0.059838"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.827327" elapsed="0.015919"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.843769" level="INFO">Typing text 'RuleTimeUser' into text field 'xpath=//label[.//span[contains(text(),'User')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleTimeUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.843601" elapsed="0.106572"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:31.950905" level="INFO">Clicking element 'xpath=//input[@name='resourceType' and @value='desk']'.</msg>
+<arg>xpath=//input[@name='resourceType' and @value='desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.950633" elapsed="0.039653"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-03T06:16:31.990696" elapsed="0.009729"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:32.000862" level="INFO">Clicking element 'xpath=(//button[contains(@aria-label,'available')])[1]'.</msg>
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:32.000697" elapsed="0.040850"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:32.042368" level="INFO">Executing JavaScript:
+const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:32.041975" elapsed="0.003505"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:32.046084" level="INFO">Executing JavaScript:
+document.querySelectorAll("input[type='time']")[0].value='07:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>document.querySelectorAll("input[type='time']")[0].value='07:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:32.045808" elapsed="0.003385"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:32.049725" level="INFO">Executing JavaScript:
+document.querySelectorAll("input[type='time']")[1].value='08:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));
+Without any arguments.</msg>
+<arg>document.querySelectorAll("input[type='time']")[1].value='08:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-03T06:16:32.049477" elapsed="0.005430"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:32.055475" level="INFO">Clicking button 'xpath=//button[@type='submit' and normalize-space(.)='Book']'.</msg>
+<arg>xpath=//button[@type='submit' and normalize-space(.)='Book']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-03T06:16:32.055273" elapsed="0.051565"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<msg time="2025-09-03T06:16:39.343271" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-9.png"&gt;&lt;img src="selenium-screenshot-9.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-09-03T06:16:39.343490" level="FAIL">Text 'outside allowed' did not appear in 7 seconds.</msg>
+<arg>outside allowed</arg>
+<arg>7s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="FAIL" start="2025-09-03T06:16:32.107143" elapsed="7.240070">Text 'outside allowed' did not appear in 7 seconds.</status>
+</kw>
+<kw name="Click Link" owner="SeleniumLibrary">
+<arg>Admin</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.347750" elapsed="0.000046"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'Restricted zones')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.348084" elapsed="0.000034"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'Restricted zones')]]//input</arg>
+<arg>A</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.348325" elapsed="0.000032"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>xpath=//button[normalize-space(.)='Save rules']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.348860" elapsed="0.000044"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.349112" elapsed="0.000040"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${BASE_URL}/booking</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.349346" elapsed="0.000034"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.349604" elapsed="0.000032"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleZoneUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.349820" elapsed="0.000038"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>xpath=//input[@name='resourceType' and @value='desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.350038" elapsed="0.000027"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//select</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.350256" elapsed="0.000035"/>
+</kw>
+<kw name="Select From List By Value" owner="SeleniumLibrary">
+<arg>xpath=//select</arg>
+<arg>1</arg>
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.350466" elapsed="0.000030"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>const d = new Date(); const iso = d.toISOString().slice(0,10); document.querySelector("input[type='date']").value=iso; document.querySelector("input[type='date']").dispatchEvent(new Event('input',{bubbles:true})); document.querySelector("input[type='date']").dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.350763" elapsed="0.000031"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>document.querySelectorAll("input[type='time']")[0].value='10:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.350960" elapsed="0.000030"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>document.querySelectorAll("input[type='time']")[1].value='11:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.351165" elapsed="0.000030"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>xpath=//button[@type='submit' and normalize-space(.)='Book']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.351368" elapsed="0.000038"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>restricted zone</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.351633" elapsed="0.000038"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" start="2025-09-03T06:16:39.351903" elapsed="0.000035"/>
+</kw>
+<doc>Verify booking rules: max per day, allowed time blocks, restricted zones</doc>
+<status status="FAIL" start="2025-09-03T06:16:29.512608" elapsed="9.839936">Text 'outside allowed' did not appear in 7 seconds.</status>
+</test>
+<status status="FAIL" start="2025-09-03T06:16:29.128489" elapsed="10.229734"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Rules" id="s1" pass="0" fail="1" skip="0">Rules</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
