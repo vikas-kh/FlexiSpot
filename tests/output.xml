@@ -1,62 +1,445 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.3 on win32)" generated="2025-09-03T21:46:47.728515" rpa="false" schemaversion="5">
-<suite id="s1" name="Navigation" source="C:\Users\vikky\OneDrive\Documents\Projects\FlexiSpot\tests\navigation.robot">
-<test id="s1-t1" name="Navigation Test" line="9">
+<robot generator="Robot 7.3.2 (Python 3.13.3 on win32)" generated="2025-09-04T07:37:10.354412" rpa="false" schemaversion="5">
+<suite id="s1" name="Rules" source="C:\Users\vikky\OneDrive\Documents\Projects\FlexiSpot\tests\rules.robot">
+<test id="s1-t1" name="Booking Rules Test" line="9">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-09-03T21:46:48.036191" level="INFO">Opening browser 'chrome' to base url 'http://localhost:5173'.</msg>
-<arg>${BASE_URL}</arg>
+<msg time="2025-09-04T07:37:10.716568" level="INFO">Opening browser 'chrome' to base url 'http://localhost:5173/booking'.</msg>
+<arg>${BASE_URL}/booking</arg>
 <arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-09-03T21:46:48.035972" elapsed="1.413239"/>
+<status status="PASS" start="2025-09-04T07:37:10.716284" elapsed="1.891387"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-09-03T21:46:49.449788" elapsed="0.033712"/>
+<status status="PASS" start="2025-09-04T07:37:12.608629" elapsed="0.055983"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:12.665804" elapsed="0.038096"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:12.704390" level="INFO">Typing text 'RuleUser' into text field 'xpath=//label[.//span[contains(text(),'User')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:12.704125" elapsed="0.233015"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:12.938341" level="INFO">Clicking element 'xpath=//button[normalize-space(.)='Desk']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:12.937694" elapsed="0.087833"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.025837" elapsed="0.015043"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.041247" level="INFO">Clicking element 'xpath=(//button[contains(@aria-label,'available')])[1]'.</msg>
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.041046" elapsed="0.062847"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.104630" level="INFO">Executing JavaScript:
+(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'09:00'); nativeTimeSetter.call(t1,'10:00'); } else { t0.value='09:00'; t1.value='10:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();
+Without any arguments.</msg>
+<arg>(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'09:00'); nativeTimeSetter.call(t1,'10:00'); } else { t0.value='09:00'; t1.value='10:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.104121" elapsed="0.009062"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.114508" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.113977" elapsed="0.085721"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} &lt; 3">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Booked</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.200422" elapsed="0.010044"/>
+</kw>
+<status status="PASS" start="2025-09-04T07:37:13.199968" elapsed="0.010983"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[@role='alert']</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-09-04T07:37:13.211393" elapsed="0.000071"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<var>${err}</var>
+<arg>xpath=//div[@role='alert']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-09-04T07:37:13.211596" elapsed="0.000026"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${err}</arg>
+<arg>(?i).*(limit|maxBookings).*</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="NOT RUN" start="2025-09-04T07:37:13.211710" elapsed="0.000020"/>
+</kw>
+<status status="NOT RUN" start="2025-09-04T07:37:13.211073" elapsed="0.000684"/>
+</branch>
+<status status="PASS" start="2025-09-04T07:37:13.199914" elapsed="0.011886"/>
+</if>
+<var name="${i}">1</var>
+<status status="PASS" start="2025-09-04T07:37:12.665620" elapsed="0.546208"/>
+</iter>
+<iter>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.212081" elapsed="0.013587"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.226458" level="INFO">Typing text 'RuleUser' into text field 'xpath=//label[.//span[contains(text(),'User')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.226018" elapsed="0.113365"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.339768" level="INFO">Clicking element 'xpath=//button[normalize-space(.)='Desk']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.339565" elapsed="0.042888"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.382695" elapsed="0.009568"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.393155" level="INFO">Clicking element 'xpath=(//button[contains(@aria-label,'available')])[1]'.</msg>
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.392902" elapsed="0.059485"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.452985" level="INFO">Executing JavaScript:
+(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'09:00'); nativeTimeSetter.call(t1,'10:00'); } else { t0.value='09:00'; t1.value='10:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();
+Without any arguments.</msg>
+<arg>(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'09:00'); nativeTimeSetter.call(t1,'10:00'); } else { t0.value='09:00'; t1.value='10:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.452595" elapsed="0.005516"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.458482" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.458276" elapsed="0.056309"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} &lt; 3">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Booked</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.514932" elapsed="0.006448"/>
+</kw>
+<status status="PASS" start="2025-09-04T07:37:13.514722" elapsed="0.006738"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[@role='alert']</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-09-04T07:37:13.521622" elapsed="0.000022"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<var>${err}</var>
+<arg>xpath=//div[@role='alert']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-09-04T07:37:13.521704" elapsed="0.000015"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${err}</arg>
+<arg>(?i).*(limit|maxBookings).*</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="NOT RUN" start="2025-09-04T07:37:13.521776" elapsed="0.000016"/>
+</kw>
+<status status="NOT RUN" start="2025-09-04T07:37:13.521499" elapsed="0.000316"/>
+</branch>
+<status status="PASS" start="2025-09-04T07:37:13.514696" elapsed="0.007139"/>
+</if>
+<var name="${i}">2</var>
+<status status="PASS" start="2025-09-04T07:37:13.212021" elapsed="0.309832"/>
+</iter>
+<iter>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.522070" elapsed="0.017014"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.539428" level="INFO">Typing text 'RuleUser' into text field 'xpath=//label[.//span[contains(text(),'User')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.539245" elapsed="0.112074"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.651772" level="INFO">Clicking element 'xpath=//button[normalize-space(.)='Desk']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.651550" elapsed="0.042448"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.694210" elapsed="0.010091"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.704634" level="INFO">Clicking element 'xpath=(//button[contains(@aria-label,'available')])[1]'.</msg>
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.704460" elapsed="0.036714"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.741653" level="INFO">Executing JavaScript:
+(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'09:00'); nativeTimeSetter.call(t1,'10:00'); } else { t0.value='09:00'; t1.value='10:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();
+Without any arguments.</msg>
+<arg>(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'09:00'); nativeTimeSetter.call(t1,'10:00'); } else { t0.value='09:00'; t1.value='10:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.741335" elapsed="0.005534"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.747545" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.747313" elapsed="0.047707"/>
+</kw>
+<if>
+<branch type="IF" condition="${i} &lt; 3">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Booked</arg>
+<arg>5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="NOT RUN" start="2025-09-04T07:37:13.795579" elapsed="0.000043"/>
+</kw>
+<status status="NOT RUN" start="2025-09-04T07:37:13.795228" elapsed="0.000449"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[@role='alert']</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.795829" elapsed="0.013187"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.856250" level="INFO">${err} = maxBookingsPerUserPerDay exceeded</msg>
+<var>${err}</var>
+<arg>xpath=//div[@role='alert']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.809392" elapsed="0.046925"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${err}</arg>
+<arg>(?i).*(limit|maxBookings).*</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.856511" elapsed="0.000356"/>
+</kw>
+<status status="PASS" start="2025-09-04T07:37:13.795722" elapsed="0.061207"/>
+</branch>
+<status status="PASS" start="2025-09-04T07:37:13.795189" elapsed="0.061781"/>
+</if>
+<var name="${i}">3</var>
+<status status="PASS" start="2025-09-04T07:37:13.522004" elapsed="0.334991"/>
+</iter>
+<var>${i}</var>
+<value>1</value>
+<value>4</value>
+<status status="PASS" start="2025-09-04T07:37:12.665035" elapsed="1.192009"/>
+</for>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:13.858134" level="INFO">Opening url 'http://localhost:5173/booking'</msg>
+<arg>${BASE_URL}/booking</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.857961" elapsed="0.114232"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:13.972733" elapsed="0.047663"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.020994" level="INFO">Typing text 'RuleTimeUser' into text field 'xpath=//label[.//span[contains(text(),'User')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleTimeUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.020752" elapsed="0.142513"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.163978" level="INFO">Clicking element 'xpath=//button[normalize-space(.)='Desk']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.163717" elapsed="0.045071"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.209778" elapsed="0.011221"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.221471" level="INFO">Clicking element 'xpath=(//button[contains(@aria-label,'available')])[1]'.</msg>
+<arg>xpath=(//button[contains(@aria-label,'available')])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.221294" elapsed="0.051291"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.273396" level="INFO">Executing JavaScript:
+(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'07:00'); nativeTimeSetter.call(t1,'08:00'); } else { t0.value='07:00'; t1.value='08:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();
+Without any arguments.</msg>
+<arg>(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'07:00'); nativeTimeSetter.call(t1,'08:00'); } else { t0.value='07:00'; t1.value='08:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.273044" elapsed="0.012435"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.286293" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.285998" elapsed="0.067107"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//div[@role='alert']</arg>
+<arg>7s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.353467" elapsed="0.012363"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.384342" level="INFO">${err_time} = Requested time outside allowed time blocks</msg>
+<var>${err_time}</var>
+<arg>xpath=//div[@role='alert']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.366219" elapsed="0.018166"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${err_time}</arg>
+<arg>(?i).*(outside allowed|outside allowed time|outside allowed blocks|outside).*</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.384681" elapsed="0.000328"/>
 </kw>
 <kw name="Click Link" owner="SeleniumLibrary">
-<msg time="2025-09-03T21:46:49.484285" level="INFO">Clicking link 'Booking'.</msg>
-<arg>Booking</arg>
-<doc>Clicks a link identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-03T21:46:49.483870" elapsed="0.119559"/>
-</kw>
-<kw name="Page Should Contain" owner="SeleniumLibrary">
-<msg time="2025-09-03T21:46:49.623120" level="INFO">Current page contains text 'Seat Booking Engine'.</msg>
-<arg>Seat Booking Engine</arg>
-<doc>Verifies that current page contains ``text``.</doc>
-<status status="PASS" start="2025-09-03T21:46:49.603941" elapsed="0.019260"/>
-</kw>
-<kw name="Click Link" owner="SeleniumLibrary">
-<msg time="2025-09-03T21:46:49.623647" level="INFO">Clicking link 'Availability'.</msg>
-<arg>Availability</arg>
-<doc>Clicks a link identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-03T21:46:49.623471" elapsed="0.082758"/>
-</kw>
-<kw name="Page Should Contain" owner="SeleniumLibrary">
-<msg time="2025-09-03T21:46:49.732035" level="INFO">Current page contains text 'View current availability'.</msg>
-<arg>View current availability</arg>
-<doc>Verifies that current page contains ``text``.</doc>
-<status status="PASS" start="2025-09-03T21:46:49.706595" elapsed="0.025542"/>
-</kw>
-<kw name="Click Link" owner="SeleniumLibrary">
-<msg time="2025-09-03T21:46:49.733736" level="INFO">Clicking link 'Admin'.</msg>
+<msg time="2025-09-04T07:37:14.385398" level="INFO">Clicking link 'Admin'.</msg>
 <arg>Admin</arg>
 <doc>Clicks a link identified by ``locator``.</doc>
-<status status="PASS" start="2025-09-03T21:46:49.732826" elapsed="0.100074"/>
+<status status="PASS" start="2025-09-04T07:37:14.385213" elapsed="0.080519"/>
 </kw>
-<kw name="Page Should Contain" owner="SeleniumLibrary">
-<msg time="2025-09-03T21:46:49.849079" level="INFO">Current page contains text 'Admin'.</msg>
-<arg>Admin</arg>
-<doc>Verifies that current page contains ``text``.</doc>
-<status status="PASS" start="2025-09-03T21:46:49.833288" elapsed="0.015885"/>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'Restricted zones')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.466646" elapsed="0.019871"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.487172" level="INFO">Typing text 'A' into text field 'xpath=//label[.//span[contains(text(),'Restricted zones')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'Restricted zones')]]//input</arg>
+<arg>A</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.486859" elapsed="0.089792"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.577670" level="INFO">Clicking button 'xpath=//button[normalize-space(.)='Save rules']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Save rules']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.577350" elapsed="0.079111"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>xpath=//pre[@data-testid='effective-rules']</arg>
+<arg>"restrictedZones"</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.656839" elapsed="0.017081"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>xpath=//pre[@data-testid='effective-rules']</arg>
+<arg>"A"</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.674306" elapsed="0.010491"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.685282" level="INFO">Opening url 'http://localhost:5173/booking'</msg>
+<arg>${BASE_URL}/booking</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.685081" elapsed="0.099843"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.785259" elapsed="0.017718"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.803469" level="INFO">Typing text 'RuleZoneUser' into text field 'xpath=//label[.//span[contains(text(),'User')]]//input'.</msg>
+<arg>xpath=//label[.//span[contains(text(),'User')]]//input</arg>
+<arg>RuleZoneUser</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.803262" elapsed="0.125939"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.930601" level="INFO">Clicking element 'xpath=//button[normalize-space(.)='Desk']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Desk']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.930024" elapsed="0.044293"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@aria-label,'D-1') and contains(@aria-label,'available')]</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.974745" elapsed="0.016305"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:14.991605" level="INFO">Clicking element 'xpath=//button[contains(@aria-label,'D-1') and contains(@aria-label,'available')]'.</msg>
+<arg>xpath=//button[contains(@aria-label,'D-1') and contains(@aria-label,'available')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:14.991415" elapsed="0.049920"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:15.042069" level="INFO">Executing JavaScript:
+(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'10:00'); nativeTimeSetter.call(t1,'11:00'); } else { t0.value='10:00'; t1.value='11:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();
+Without any arguments.</msg>
+<arg>(function(){ const d = new Date(); const iso = d.toISOString().slice(0,10); const dateEl = document.querySelector("input[type='date']"); const desc = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value'); const nativeDateSetter = desc &amp;&amp; desc.set; const nativeTimeSetter = desc &amp;&amp; desc.set; if(nativeDateSetter) nativeDateSetter.call(dateEl, iso); dateEl.dispatchEvent(new Event('input', { bubbles: true })); dateEl.dispatchEvent(new Event('change', { bubbles: true })); const t0 = document.querySelectorAll("input[type='time']")[0]; const t1 = document.querySelectorAll("input[type='time']")[1]; if(nativeTimeSetter){ nativeTimeSetter.call(t0,'10:00'); nativeTimeSetter.call(t1,'11:00'); } else { t0.value='10:00'; t1.value='11:00'; } t0.dispatchEvent(new Event('input',{bubbles:true})); t0.dispatchEvent(new Event('change',{bubbles:true})); t1.dispatchEvent(new Event('input',{bubbles:true})); t1.dispatchEvent(new Event('change',{bubbles:true})); })();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-04T07:37:15.041682" elapsed="0.011522"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-04T07:37:15.053707" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-04T07:37:15.053519" elapsed="0.066422"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Booked</arg>
+<arg>7s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-04T07:37:15.120390" elapsed="0.008006"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-09-03T21:46:49.849553" elapsed="2.206014"/>
+<status status="PASS" start="2025-09-04T07:37:15.128811" elapsed="2.265753"/>
 </kw>
-<doc>Open site and navigate through main links verifying page content.</doc>
-<status status="PASS" start="2025-09-03T21:46:48.035252" elapsed="4.021217"/>
+<doc>Verify booking rules: max per day, allowed time blocks, restricted zones</doc>
+<status status="PASS" start="2025-09-04T07:37:10.715333" elapsed="6.681210"/>
 </test>
-<status status="PASS" start="2025-09-03T21:46:47.729824" elapsed="4.327919"/>
+<status status="PASS" start="2025-09-04T07:37:10.356468" elapsed="7.041418"/>
 </suite>
 <statistics>
 <total>
@@ -65,7 +448,7 @@
 <tag>
 </tag>
 <suite>
-<stat name="Navigation" id="s1" pass="1" fail="0" skip="0">Navigation</stat>
+<stat name="Rules" id="s1" pass="1" fail="0" skip="0">Rules</stat>
 </suite>
 </statistics>
 <errors>

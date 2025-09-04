@@ -41,7 +41,15 @@ export function BookingProvider({ children, initialData } = {}) {
     const source = initialData && Array.isArray(initialData.bookings) ? initialData.bookings : mockBookings
     return source.slice()
   })
-  const [rules, setRules] = useState(() => ({ ...DEFAULT_RULES }))
+  const [rules, setRules] = useState(() => {
+    try {
+      const raw = typeof window !== 'undefined' && window.localStorage && window.localStorage.getItem('flexispot:rules')
+      if (raw) return JSON.parse(raw)
+    } catch {
+      // ignore
+    }
+    return { ...DEFAULT_RULES }
+  })
   const [exceptions, setExceptions] = useState([]) // { id, user, ruleKey, value }
 
   // derived lookup helpers
@@ -57,9 +65,7 @@ export function BookingProvider({ children, initialData } = {}) {
     return m
   }, [rooms])
 
-  function findExceptionFor(user, ruleKey) {
-    return exceptions.find(e => e.user === user && e.ruleKey === ruleKey)
-  }
+  // helper to find exceptions is intentionally inlined where needed
 
   /**
    * Check resource availability by checking existing bookings for overlap
@@ -92,8 +98,65 @@ export function BookingProvider({ children, initialData } = {}) {
 
     // Use centralized validator to ensure consistent rule enforcement/messages
     const booking = { user, resourceType, resourceId: Number(resourceId), dateISO, startTime, endTime }
+
+  // DEBUG: log current rules and exceptions before validation
+  console.log('[bookResource] validating booking', booking, 'rules=', rules, 'exceptions=', exceptions)
+
+    // PRE-CHECK: enforce restricted zones immediately to avoid race between pages
+    try {
+      if (resourceType === 'desk') {
+        const desk = desks.find(d => Number(d.id) === Number(resourceId))
+        const restrictedZonesRaw = Array.isArray(rules.restrictedZones) ? rules.restrictedZones : []
+        const restrictedZones = restrictedZonesRaw.map(z => (z === undefined || z === null) ? '' : String(z).trim().toUpperCase())
+        const deskZoneNorm = desk && desk.zone ? String(desk.zone).trim().toUpperCase() : ''
+        const hasZoneException = Boolean(exceptions.find(e => e.user === user && e.ruleKey === 'restrictedZones'))
+        if (desk && restrictedZones.includes(deskZoneNorm) && !hasZoneException) {
+          return { success: false, error: `Desk in restricted zone ${desk.zone}` }
+        }
+      }
+    } catch {
+      // ignore
+    }
+
     const validation = validateBooking(booking, { bookings, rules, exceptions, desks })
+    // DEBUG: log validation result and write a DOM sink for E2E tests
+    console.log('[bookResource] validation result=', validation)
+    try {
+      const id = '__bookresource_validation'
+      let el = typeof document !== 'undefined' && document.getElementById && document.getElementById(id)
+      if (!el && typeof document !== 'undefined' && document.createElement) {
+        el = document.createElement('pre')
+        el.id = id
+        el.setAttribute('data-testid', 'bookresource-validation')
+        el.style.position = 'fixed'
+        el.style.left = '20px'
+        el.style.bottom = '0px'
+        el.style.opacity = '0.01'
+        el.style.height = '1px'
+        el.style.width = '1px'
+        el.style.zIndex = '99999'
+        document.body.appendChild(el)
+      }
+      if (el) el.textContent = JSON.stringify(validation)
+    } catch {
+      // ignore
+    }
+
     if (!validation.ok) return { success: false, error: validation.reason }
+
+    // DEFENSIVE: additionally enforce restricted zones at booking time in case of mismatch
+    try {
+      if (resourceType === 'desk') {
+        const desk = desks.find(d => Number(d.id) === Number(resourceId))
+        const restrictedZones = Array.isArray(rules.restrictedZones) ? rules.restrictedZones : []
+        const hasZoneException = Boolean(exceptions.find(e => e.user === user && e.ruleKey === 'restrictedZones'))
+        if (desk && restrictedZones.includes(desk.zone) && !hasZoneException) {
+          return { success: false, error: `Desk in restricted zone ${desk.zone}` }
+        }
+      }
+    } catch {
+      // ignore defensive check errors
+    }
 
     // availability check (overlapping bookings)
     if (!isResourceAvailableAt(resourceType, resourceId, dateISO, startTime, endTime)) {
@@ -130,7 +193,20 @@ export function BookingProvider({ children, initialData } = {}) {
   }
 
   function updateRules(partialRules) {
-    setRules(prev => ({ ...prev, ...partialRules }))
+    // DEBUG: log incoming partial rules
+    console.log('[updateRules] incoming partialRules=', partialRules)
+    const next = { ...rules, ...partialRules }
+    try { console.log('[updateRules] next rules=', next) } catch {
+      // ignore logging errors
+    }
+    setRules(next)
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        window.localStorage.setItem('flexispot:rules', JSON.stringify(next))
+      }
+    } catch {
+      // ignore localStorage errors
+    }
     return { success: true }
   }
 
@@ -160,6 +236,29 @@ export function BookingProvider({ children, initialData } = {}) {
   removeException,
     // helpers
     isResourceAvailableAt,
+  }
+
+  // Debug sink: write current rules into a DOM element so end-to-end tests can read them
+  try {
+    const elId = '__effective_rules_debug'
+    let el = document.getElementById(elId)
+    if (!el) {
+      el = document.createElement('pre')
+      el.id = elId
+      el.setAttribute('data-testid', 'effective-rules-debug')
+      // make it tiny but readable by Selenium (avoid display:none)
+      el.style.position = 'fixed'
+      el.style.left = '0px'
+      el.style.bottom = '0px'
+      el.style.opacity = '0.01'
+      el.style.height = '1px'
+      el.style.width = '1px'
+      el.style.zIndex = '99999'
+      document.body.appendChild(el)
+    }
+    el.textContent = JSON.stringify(rules)
+  } catch {
+    // ignore in non-browser environments
   }
 
   return <BookingContext.Provider value={value}>{children}</BookingContext.Provider>

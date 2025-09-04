@@ -29,17 +29,19 @@ export default function SeatMap({ mode = 'desk', selectedId = null, onSelect = (
           const globallyDisabled = r.isAvailable === false
           const availableForWindow = isResourceAvailableAt(mode, id, viewDate, viewStart, viewEnd)
 
-          let btnClass = 'w-14 h-14 flex items-center justify-center rounded select-none font-medium'
+          // card styles: softer palette, subtle shadow, hover lift
+          let btnClass = 'w-14 h-14 flex items-center justify-center rounded-lg select-none font-medium transition transform duration-150 '
 
           if (globallyDisabled) {
-            btnClass += ' bg-gray-300 text-gray-700 cursor-not-allowed'
+            btnClass += ' bg-gray-200 text-gray-600 cursor-not-allowed shadow-sm'
           } else if (!availableForWindow) {
-            btnClass += ' bg-red-500 text-white cursor-not-allowed'
+            // booked -> amber (softer than red)
+            btnClass += ' bg-amber-400 text-white cursor-not-allowed shadow-sm'
           } else {
-            // available
+            // available -> teal
             btnClass += selectedId === id
-              ? ' bg-green-700 text-white ring-2 ring-offset-2 ring-green-300'
-              : ' bg-green-400 hover:bg-green-500 text-white cursor-pointer'
+              ? ' bg-teal-700 text-white ring-2 ring-offset-2 ring-teal-300 scale-100'
+              : ' bg-teal-400 hover:bg-teal-500 text-white cursor-pointer hover:-translate-y-0.5 shadow-sm'
           }
 
           return (
@@ -62,7 +64,7 @@ export default function SeatMap({ mode = 'desk', selectedId = null, onSelect = (
         })}
       </div>
 
-      <p className="mt-3 text-sm text-gray-600">Green = available, Red = booked, Gray = disabled (global).</p>
+      <p className="mt-3 text-sm text-gray-600">Green = available, Amber = booked, Gray = disabled (global).</p>
     </div>
   )
 }

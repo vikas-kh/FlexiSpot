@@ -14,7 +14,7 @@ Real-Time Availability Test
     Wait Until Element Is Visible    xpath=//label[.//span[contains(text(),'User')]]//input    5s
     Input Text    xpath=//label[.//span[contains(text(),'User')]]//input    AvailTester
 
-    Click Element    xpath=//input[@name='resourceType' and @value='desk']
+    Click Element    xpath=//button[normalize-space(.)='Desk']
 
     # Find and remember the first available desk's label, then click it
     Wait Until Element Is Visible    xpath=(//button[contains(@aria-label,'available')])[1]    5s
@@ -26,7 +26,7 @@ Real-Time Availability Test
     Execute JavaScript    document.querySelectorAll("input[type='time']")[0].value='10:00';document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[0].dispatchEvent(new Event('change',{bubbles:true}));
     Execute JavaScript    document.querySelectorAll("input[type='time']")[1].value='11:00';document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('input',{bubbles:true}));document.querySelectorAll("input[type='time']")[1].dispatchEvent(new Event('change',{bubbles:true}));
 
-    Click Button    xpath=//button[@type='submit' and normalize-space(.)='Book']
+    Click Button    xpath=//button[@type='submit']
 
     # Wait until booking confirmation appears
     Wait Until Page Contains    Booked    7s

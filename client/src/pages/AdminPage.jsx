@@ -20,6 +20,27 @@ export default function AdminPage() {
     })
     const restricted = restrictedZonesText.split(',').map(s => s.trim()).filter(Boolean)
     updateRules({ maxBookingsPerUserPerDay: Number(maxPerDay), allowedTimeBlocks: blocks, restrictedZones: restricted })
+    // Also write to debug sink for end-to-end tests
+    try {
+      const elId = '__effective_rules_debug'
+      let el = document.getElementById(elId)
+      if (!el) {
+        el = document.createElement('pre')
+        el.id = elId
+        el.setAttribute('data-testid', 'effective-rules-debug')
+        el.style.position = 'fixed'
+        el.style.left = '0px'
+        el.style.bottom = '0px'
+        el.style.opacity = '0.01'
+        el.style.height = '1px'
+        el.style.width = '1px'
+        el.style.zIndex = '99999'
+        document.body.appendChild(el)
+      }
+      el.textContent = JSON.stringify({ maxBookingsPerUserPerDay: Number(maxPerDay), allowedTimeBlocks: blocks, restrictedZones: restricted })
+    } catch {
+      // ignore
+    }
   }
 
   function handleAddException(e) {
