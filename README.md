@@ -177,7 +177,7 @@ Notes & troubleshooting
 - If tests fail because the app state didn't propagate (race conditions), re-run the suite after ensuring the dev server is ready and the Admin changes are saved.
 - If you prefer a single command, you can run each suite sequentially in one PowerShell invocation; explicit commands above are usually clearer for debugging.
 
-If you'd like, I can also add a `tests/requirements.txt` or a small PowerShell script to automate environment setup and test runs.
 
 # FlexiSpot
+
 
